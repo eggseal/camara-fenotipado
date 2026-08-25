@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Header of the page that shows the title and logo -->
+      <header>
+        <img src="/images/eafit-logo.png" alt="EAFIT" class="page-logo" />
+        <h1 class="page-title">Cámara de Fenotipado | Dashboard</h1>
+      </header>
+
+      <!-- Background image that covers the entire page -->
+      <div class="background-wrapper">
+        <div id="background"></div>
+      </div>
+
+      <!-- Toast popup that appears at the top to show a message -->
+      <div class="hidden" id="popup"></div>
+
+      <!-- Popup window that shows image results  -->
+      <div id="results-popup" class="window-popup hidden">
+        <div class="popup-content">
+          <h2 class="popup-title">Resultado del fenotipado</h2>
+          <div class="popup-section">
+            <div class="popup-sidebar">
+              <!-- Display of the amount of pictures taken by camera -->
+              <div class="count-display">
+                <span>RGB Top</span>
+                <span id="rgbt-count">...</span>
+                <span>RGB Side</span>
+                <span id="rgb-count">...</span>
+                <span>RGN</span>
+                <span id="rgn-count">...</span>
+                <span>RE</span>
+                <span id="re-count">...</span>
+              </div>
+              <!-- Display of the current page of the retreived images -->
+              <div class="page-display">
+                <span id="previous-page" class="page-control">&lt;</span>
+                <span id="current-page">X</span>
+                <span>/</span>
+                <span id="total-pages">X</span>
+                <span id="next-page" class="page-control">&gt;</span>
+              </div>
+            </div>
+            <!-- Loading animation -->
+            <div class="loader">
+              <div></div>
+            </div>
+            <!-- Grid display of all the images grouped by camera type -->
+            <div class="popup-main">
+              <div class="camera-view" id="rgbt-view">
+                <div class="image-name"></div>
+                <div class="image-wrapper">
+                  <img class="image-preview" />
+                </div>
+              </div>
+              <div class="camera-view" id="rgb-view">
+                <div class="image-name"></div>
+                <div class="image-wrapper">
+                  <img class="image-preview" />
+                </div>
+              </div>
+              <div class="camera-view" id="rgn-view">
+                <div class="image-name"></div>
+                <div class="image-wrapper">
+                  <img class="image-preview" />
+                </div>
+              </div>
+              <div class="camera-view" id="re-view">
+                <div class="image-name"></div>
+                <div class="image-wrapper">
+                  <img class="image-preview" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirmation popup to delete all sessions -->
+      <div class="window-popup text-popup hidden" id="delete-popup">
+        <div class="popup-content">
+          <h2 class="popup-title">Eliminar resultados</h2>
+          <div class="popup-text">
+            ¿Desea eliminar todos los resultados almacenados en la Cámara de Fenotipado para siempre
+            (mucho tiempo)? Esta acción no se puede revertir
+          </div>
+          <div class="confirmation-buttons">
+            <button class="primary-btn">Confirmar</button>
+            <button class="secondary-btn">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirmation popup to turn off the system -->
+      <div class="window-popup text-popup hidden" id="turnoff-popup">
+        <div class="popup-content">
+          <h2 class="popup-title">Apagar el sistema</h2>
+          <div class="popup-text">¿Desea apagar el sistema?</div>
+          <div class="confirmation-buttons">
+            <button class="primary-btn">Confirmar</button>
+            <button class="secondary-btn">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-container">
+        <!-- Main display grid of all the dashboard components -->
+        <main>
+          <div class="widget">
+            <span class="widget-title">Cámara Superior</span>
+            <live-camera id="live-rgbt" src="/api/video/1" />
+          </div>
+          <div class="widget">
+            <span class="widget-title">Cámara Lateral</span>
+            <live-camera id="live-rgb" src="/api/video/0" />
+          </div>
+          <!-- <div class="widget">
+            <span class="widget-title">Temperatura</span>
+            <widget-thermo id="temp" max="50" color="#D6821A" suffix="°C" />
+          </div>
+          <div class="widget">
+            <span class="widget-title">Humedad</span>
+            <widget-gauge id="hum" suffix="%" color="#0491BF" />
+          </div> -->
+          <div class="widget">
+            <span class="widget-title">Luz Blanca</span>
+            <widget-bulb id="white_lux" max="1000" color="#6A9491" suffix="lux" />
+          </div>
+          <div class="widget">
+            <span class="widget-title">Luz Infrarroja</span>
+            <widget-bulb id="ir_lux" max="1000" color="#dc3b3b" suffix="lux" />
+          </div>
+          <div class="widget">
+            <span class="widget-title">Luz Ultravioleta</span>
+            <widget-bulb id="uv_lux" max="14" color="#941AD6" suffix="lux" />
+          </div>
+          <div class="widget">
+            <span class="widget-title">Ángulo</span>
+            <widget-value id="angle" suffix="°" color="#000" />
+          </div>
+          <div class="widget">
+            <span class="widget-title">Progreso</span>
+            <widget-bar id="progress" suffix="%" color="#2AAB1F" />
+          </div>
+          <div class="widget">
+            <span class="widget-title">Fotos</span>
+            <widget-picker id="photo_amount" color="#fff" />
+          </div>
+          <div class="widget">
+            <span class="widget-title">Encendido / Apagado</span>
+            <widget-button id="running" on="⏹" off="▶" />
+          </div>
+          <div class="widget">
+            <div id="credits">
+              <div class="names">
+                <div>
+                  <p>Luis Felipe Arciniegas Espitia</p>
+                  <p>Nicolás Castro Restrepo</p>
+                  <p>Centro de Laboratorios</p>
+                </div>
+                <div>
+                  <p>Nicolás José Sánchez Mendoza</p>
+                  <p>Samuel Giraldo Cortés</p>
+                  <p>David Velásquez Rendón</p>
+                </div>
+              </div>
+              <div class="logo">
+                <img src="/images/sise-logo.png" alt="SISE" />
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Control panel that appears at the bottom right of the page -->
+        <div id="control-panel">
+          <div class="button-wrapper">
+            <div class="button-hover-label">Ver último resultado</div>
+            <button class="panel-button" id="open-results">
+              <img src="/icons/picture.svg" alt="" />
+            </button>
+          </div>
+          <div class="button-wrapper">
+            <div class="button-hover-label">Descargar resultados</div>
+            <button class="panel-button" id="download">
+              <img src="/icons/download.svg" alt="" />
+            </button>
+          </div>
+          <div class="button-wrapper">
+            <div class="button-hover-label">Eliminar resultados</div>
+            <button class="panel-button" id="delete">
+              <img src="/icons/delete.svg" alt="" />
+            </button>
+          </div>
+          <div class="button-wrapper lower-control">
+            <div class="button-hover-label">Apagar</div>
+            <button class="panel-button" id="turn-off">
+              <img src="/icons/turn-off.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Templates for all the components -->
+      <!-- Thermometer -->
+      <template id="temp-thermometer">
+        <div class="object thermometer">
+          <svg viewBox="0 0 42.333333 113.77084" version="1.1">
+            <defs id="defs1" />
+            <g id="layer1" transform="translate(-1.3229183,-34.395835)">
+              <path
+                d="m 22.489585,35.71875 c -6.596063,0 -11.906251,5.310188 -11.906251,11.90625 v 63.59923 c -4.9689417,3.72659 -7.9063868,9.56476 -7.9375007,15.77578 0,10.9594 8.8843507,19.84375 19.8437517,19.84375 10.9594,0 19.84375,-8.88435 19.84375,-19.84375 -3.26e-4,-6.2456 -2.941019,-12.1266 -7.9375,-15.87396 V 47.625 c 0,-6.596062 -5.310188,-11.90625 -11.90625,-11.90625 z"
+                style="
+                  fill: none;
+                  stroke: #000000;
+                  stroke-width: 1;
+                  stroke-miterlimit: 12;
+                  paint-order: fill markers stroke;
+                "
+              />
+              <circle
+                style="fill-opacity: 1; paint-order: fill markers stroke"
+                cx="22.489586"
+                cy="127.00002"
+                r="13.229167"
+              />
+              <rect
+                style="fill-opacity: 1; paint-order: fill markers stroke"
+                width="10.583333"
+                height="79.375"
+                x="17.197918"
+                y="42.333336"
+                rx="5.2916665"
+              />
+            </g>
+          </svg>
+        </div>
+        <span class="value"></span>
+      </template>
+      <!-- Light bulb -->
+      <template id="temp-bulb">
+        <div class="object bulb">
+          <svg viewBox="0 0 20.108334 24.077084" version="1.1">
+            <defs id="defs1" />
+            <g id="layer1" transform="translate(-1.1906249,-1.1906249)">
+              <path
+                d="m 11.244792,1.3229167 c -5.4797006,0 -9.9218753,4.4421747 -9.9218753,9.9218753 0.010533,2.810448 1.2124748,5.484581 3.3072916,7.358207 v 3.225126 c 0,1.83224 1.4750521,3.307292 3.3072917,3.307292 h 6.614583 c 1.83224,0 3.307292,-1.475052 3.307292,-3.307292 v -3.225126 c 2.094817,-1.873626 3.296759,-4.547759 3.307292,-7.358207 0,-5.4797006 -4.442175,-9.9218753 -9.921875,-9.9218753 z"
+                style="
+                  fill: none;
+                  stroke: #000000;
+                  stroke-width: 0.264583;
+                  stroke-linecap: square;
+                  stroke-miterlimit: 12;
+                  stroke-dasharray: none;
+                  stroke-opacity: 1;
+                  paint-order: fill markers stroke;
+                "
+                id="path2"
+              />
+              <path
+                style="
+                  fill: none;
+                  stroke: #000000;
+                  stroke-width: 0.264583;
+                  stroke-linecap: square;
+                  stroke-miterlimit: 0;
+                  stroke-dasharray: none;
+                  stroke-opacity: 1;
+                  paint-order: fill markers stroke;
+                "
+                d="m 6.583082,21.719692 c -0.014928,0.308565 -0.029855,0.617124 1.4831428,0.77186 1.5129979,0.154736 4.5537402,0.155636 6.0689232,0.01628 1.515183,-0.13936 1.504627,-0.41897 1.49407,-0.698585"
+                id="path3"
+                transform="translate(0.13923923,0.9249951)"
+              />
+              <path
+                style="
+                  fill: none;
+                  stroke: #000000;
+                  stroke-width: 0.264583;
+                  stroke-linecap: square;
+                  stroke-miterlimit: 0;
+                  stroke-dasharray: none;
+                  stroke-opacity: 1;
+                  paint-order: fill markers stroke;
+                "
+                d="m 6.583082,21.719692 c -0.014928,0.308565 -0.029855,0.617124 1.4831428,0.77186 1.5129979,0.154736 4.5537402,0.155636 6.0689232,0.01628 1.515183,-0.13936 1.504627,-0.41897 1.49407,-0.698585"
+                id="path4"
+                transform="translate(0.13923923,-1.1916716)"
+              />
+              <circle
+                style="paint-order: fill markers stroke"
+                id="path5"
+                cx="11.244792"
+                cy="11.244791"
+                r="8.598958"
+              />
+            </g>
+          </svg>
+        </div>
+        <span class="value"></span>
+      </template>
+      <!-- Water tank -->
+      <template id="temp-gauge">
+        <p class="title"></p>
+        <div class="object gauge">
+          <svg viewBox="0 0 26.743587 14.029117" version="1.1">
+            <defs id="defs1">
+              <linearGradient id="linearGradient7">
+                <stop style="stop-opacity: 1" offset="0.5" id="stop7" />
+                <stop style="stop-opacity: 0" offset="0.5" id="stop8" />
+              </linearGradient>
+              <linearGradient
+                xlink:href="#linearGradient7"
+                id="linearGradient8"
+                x1="0.92604166"
+                y1="11.90625"
+                x2="26.061459"
+                y2="11.90625"
+                gradientUnits="userSpaceOnUse"
+                gradientTransform="translate(0,1.5875)"
+              />
+            </defs>
+            <g id="layer1" transform="translate(-0.12195634,-0.12609045)">
+              <path
+                d="M 13.49375,0.26871745 A 13.229167,13.229167 0 0 0 0.26458333,13.497884 H 9.525 a 3.96875,3.96875 0 0 1 3.96875,-3.9687499 3.96875,3.96875 0 0 1 3.96875,3.9687499 h 9.260417 A 13.229167,13.229167 0 0 0 13.49375,0.26871745 Z"
+                style="
+                  fill: none;
+                  stroke: #000;
+                  stroke-width: 0.2;
+                  paint-order: fill markers stroke;
+                "
+              />
+              <rect
+                style="
+                  fill: url(#linearGradient8);
+                  fill-opacity: 1;
+                  paint-order: fill markers stroke;
+                "
+                id="rect7"
+                width="25.135416"
+                height="1.3229166"
+                x="0.92604166"
+                y="12.832291"
+                ry="0.66145831"
+              />
+              <circle
+                style="paint-order: fill markers stroke"
+                id="path8"
+                cx="13.49375"
+                cy="13.493749"
+                r="0.66145831"
+              />
+            </g>
+          </svg>
+        </div>
+        <span class="value"></span>
+      </template>
+      <!-- Horizontal bar -->
+      <template id="temp-bar">
+        <div class="object bar">
+          <div class="bar-border">
+            <div class="bar"></div>
+          </div>
+        </div>
+        <span class="value"></span>
+      </template>
+      <!-- Raw value -->
+      <template id="temp-value">
+        <span class="object value"></span>
+      </template>
+      <!-- Button -->
+      <template id="temp-button">
+        <button class="object">
+          <span class="value"></span>
+        </button>
+      </template>
+      <!-- Number picker -->
+      <template id="temp-picker">
+        <div class="picker-wrapper object">
+          <button class="sub">&lt;</button>
+          <span class="value"></span>
+          <button class="add">&gt;</button>
+        </div>
+      </template>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

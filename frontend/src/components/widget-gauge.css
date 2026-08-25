@@ -1,0 +1,28 @@
+.gauge {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.gauge svg {
+  flex: 1 1 0;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+.gauge circle {
+  r: 0.75px
+}
+
+.gauge rect {
+  transform-origin: center;
+  transform-box: fill-box;
+  transform: rotate(var(--rotation));
+  transition: 150ms ease-in-out;
+}
+
+.gauge linearGradient stop {
+  stop-color: var(--clr);
+}

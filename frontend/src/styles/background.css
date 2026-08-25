@@ -1,0 +1,18 @@
+.background-wrapper {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: -1;
+}
+
+#background {
+  position: absolute;
+  inset: -4rem;
+  content: "";
+  background-image: url("/images/background-cacao.jpg");
+  background-size: cover;
+  background-position: center bottom;
+  filter: blur(3rem);
+  z-index: 1;
+}

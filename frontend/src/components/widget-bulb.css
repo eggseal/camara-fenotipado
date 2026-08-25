@@ -1,0 +1,19 @@
+.bulb {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.bulb svg {
+  flex: 1 1 0;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+.bulb circle {
+  fill: var(--clr);
+  r: clamp(0%, var(--r), 100%); /*var(--r);*/
+  transition: 150ms ease-in-out;
+}

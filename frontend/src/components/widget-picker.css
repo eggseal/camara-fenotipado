@@ -1,0 +1,29 @@
+.widget:has(widget-picker) {
+  color: white;
+  --fg-3: #c0c0c0;
+}
+
+.picker-wrapper {
+  display: flex;
+  padding-top: 1rem;
+  align-items: center;
+  height: 100%;
+}
+
+.picker-wrapper button {
+  cursor: pointer;
+  padding: 1rem 0.5rem;
+  color: black;
+  background-color: var(--clr);
+  border: 2px solid var(--clr);
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.picker-wrapper .value {
+  padding: 0.5rem;
+  color: var(--clr);
+  width: fit-content;
+  border-bottom: 2px solid var(--clr);
+}

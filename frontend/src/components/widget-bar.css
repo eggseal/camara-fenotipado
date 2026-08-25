@@ -1,0 +1,24 @@
+.object.bar {
+  display: flex;
+}
+
+.bar .bar-border {
+  margin: auto 0;
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  border: 2px solid var(--fg-1);
+  border-radius: 100vmax;
+}
+
+.bar .bar {
+  height: 1rem;
+  width: var(--value);
+  background-color: var(--clr);
+  border-bottom: 0;
+  border-radius: 100vmax;
+  transition: 500ms;
+}

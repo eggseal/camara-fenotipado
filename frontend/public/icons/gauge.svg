@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="26.743587mm"
+   height="14.029117mm"
+   viewBox="0 0 26.743587 14.029117"
+   version="1.1"
+   id="svg1"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient7">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0.5"
+         id="stop7" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="0.5"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient7"
+       id="linearGradient8"
+       x1="0.92604166"
+       y1="11.90625"
+       x2="26.061459"
+       y2="11.90625"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,1.5875)" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-0.12195634,-0.12609045)">
+    <path
+       d="M 13.49375,0.26871745 A 13.229167,13.229167 0 0 0 0.26458333,13.497884 H 9.525 a 3.96875,3.96875 0 0 1 3.96875,-3.9687499 3.96875,3.96875 0 0 1 3.96875,3.9687499 h 9.260417 A 13.229167,13.229167 0 0 0 13.49375,0.26871745 Z"
+       style="fill:none;stroke:#000000;stroke-width:0.285254;stroke-linecap:square;stroke-miterlimit:0;paint-order:fill markers stroke"
+       id="path7" />
+    <rect
+       style="fill:url(#linearGradient8);fill-opacity:1;stroke:none;stroke-width:0.435902;stroke-linecap:square;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect7"
+       width="25.135416"
+       height="1.3229166"
+       x="0.92604166"
+       y="12.832291"
+       ry="0.66145831" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0661455;stroke-linecap:square;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       id="path8"
+       cx="13.49375"
+       cy="13.493749"
+       r="0.66145831" />
+  </g>
+</svg>

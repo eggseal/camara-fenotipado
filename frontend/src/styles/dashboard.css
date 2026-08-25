@@ -1,0 +1,54 @@
+main {
+  display: grid;
+  padding: 1rem calc(2rem + clamp(0rem, 5%, 7.5rem));
+  gap: 0.5rem;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  /* max-height: calc(100% - 2rem - 4.25rem); */
+}
+
+.widget:has(#live-rgbt),
+.widget:has(#live-rgb) {
+  grid-column: span 5;
+  grid-row: span 8;
+}
+
+.widget:has(#temp),
+.widget:has(#hum) {
+  grid-column: span 3;
+  grid-row: span 4;
+}
+
+.widget:has(#white_lux),
+.widget:has(#ir_lux),
+.widget:has(#uv_lux) {
+  grid-column: span 2;
+  grid-row: span 4;
+}
+
+.widget:has(#angle) {
+  grid-column: span 3;
+  grid-row: span 3;
+}
+.widget:has(#progress) {
+  grid-column: span 3;
+  grid-row: span 3;
+}
+
+.widget:has(#photo_amount) {
+  grid-column: span 3;
+  grid-row: span 3;
+  --bg-alpha: #000000a0;
+  --border-alpha: #000000;
+}
+.widget:has(#running) {
+  grid-column: span 3;
+  grid-row: span 3;
+  --bg-alpha: #000000a0;
+  --border-alpha: #000000;
+}
+
+.widget:has(#credits) {
+  grid-column: span 10;
+  grid-row: span 2;
+}

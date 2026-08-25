@@ -1,0 +1,19 @@
+live-camera {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+live-camera img {
+  margin-top: 1rem;
+  height: 100%;
+  max-height: 100%;
+  background-color: #000000a0;
+  border-radius: .5rem;
+  overflow: hidden;
+  object-fit: contain;
+  object-position: center;
+}

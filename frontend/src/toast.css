@@ -1,0 +1,19 @@
+#popup {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem gray;
+  z-index: 9999;
+  transition: 150ms;
+}
+#popup.hidden {
+  opacity: 0;
+}
